@@ -19,3 +19,7 @@ function countBodyChildren() {
 window.onload = function() {
     countBodyChildren();
 }
+/*
+    不管什么时候，只要查询DOM中的某些元素，浏览器都会搜索整个DO树，从中查找匹配的元素。
+    所以要尽量少访问DOM。
+*/
