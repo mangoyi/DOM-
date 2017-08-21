@@ -22,7 +22,7 @@ function showPic(whichPic){
 // }
 
 window.onload = function() {
-    countBodyChildren();
+    // countBodyChildren();
     prepareGallery();
 }
 

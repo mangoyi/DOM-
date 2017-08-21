@@ -27,6 +27,12 @@ ul li{
     padding: 1em;
     list-style: none;
 }
-img{
-    display: block;
+#imagegallery {
+    list-style:none;
+}
+#imagegallery li {
+    display: inline;
+}
+#imagegallery li a img {
+    border: 0;
 }
