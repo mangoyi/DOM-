@@ -20,3 +20,22 @@ if (links.lengh > 0) {
         // dosomething
     }
 }
+// 文档的机构和文档的行为分开
+/*
+    结构化程序设计： 函数应该只有一个入口和一个出口。
+    如果一个函数有多个出口，只要这些出口集中出现在函数的开头部分，就是相当可以接受的，如下：
+
+*/
+function getGallery() {
+    if(!document.getElementById()) {
+        return false;
+    }
+    if(!document.getElementsByTagName()) {
+        return false;
+    }
+    // doSomething
+}
+
+/*
+    在为变量命名的时候，一定要谨慎，"保留字"的单词不能作为变量名，关键字当然也是要注意的细节。
+*/
