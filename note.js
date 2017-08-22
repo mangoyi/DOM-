@@ -44,3 +44,13 @@ function getGallery() {
     结构和行为彻底分开。
     DOM提供了insertBefore()方法，但是没有相应的insertAfter()方法.
 */
+
+// 编写insertAfter()函数：(脚本)
+function insertAfter(newElement, targetElement) {
+    var parent = targetElement.parentNode;
+    if (parent.lastChild == targetElement) {
+        parent.appendChild(newElement);
+    } else {
+        parent.insertBefore(newElement, targetElement.nextSibling);
+    }
+}

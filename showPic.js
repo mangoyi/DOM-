@@ -5,16 +5,12 @@ function showPic(whichPic){
     var source = whichPic.getAttribute('href');
     var placeholder = document.getElementById('placeholder');
     placeholder.setAttribute("src", source);
-    if (document.getElementById('decription')) {   // 即使文档中没有placehoolder和decription元素，也不会发生任何javascript错误。
+    if (document.getElementById('description')) {   // 即使文档中没有placehoolder和decription元素，也不会发生任何javascript错误。
         var text = whichPic.getAttribute('title');
         var description = document.getElementById('description');
-        description.firstChild.nodeValue = text;        
+        description.firstChild.nodeValue = text;
     }
     return true;    
-}
-
-window.onload = function() {
-    prepareGallery();
 }
 
 function prepareGallery() {
@@ -24,23 +20,37 @@ function prepareGallery() {
         links[i].onclick = function() {
             return showPic(this) ? false : true;   // 阻止a元素的默认行为
         }
+        links[i].onkeypress = links[i].onclick;
     }
 }
 
 // js创建img元素和p元素生成到文档中
-var placeholder = document.createElement('img');
-placeholder.setAttribute("id", "placeholder");
-placeholder.setAttribute("src", "placeholder.jpg");
-placeholder.setAttribute("alt", "my image gallery");
-var description = document.createElement('p');
-description.setAttribute("id", "description");
-var desctext = document.createTextNode("Choose an image");
-description.appendChild(desctext);
+function preparePlaceholder() {
+    var placeholder = document.createElement('img');
+    placeholder.setAttribute("id", "placeholder");
+    placeholder.setAttribute("src", "placeholder.jpg");
+    placeholder.setAttribute("alt", "my image gallery");
+    var description = document.createElement('p');
+    description.setAttribute("id", "description");
+    var desctext = document.createTextNode("Choose an image");
+    description.appendChild(desctext);
+    var gallery = document.getElementById("imagegallery");
+    insertAfter(placeholder, gallery);
+    insertAfter(description, placeholder);
+}
 
-// 插入文档
-document.body.appendChild(placeholder);
-document.body.appendChild(description);
+// insertAfter() 函数
+function insertAfter(newElement, targetElement) {
+    var parent = targetElement.parentNode;
+    if (parent.lastChild == targetElement) {
+        parent.appendChild(newElement);
+    } else {
+        parent.insertBefore(newElement, targetElement.nextSibling);
+    }
+}
 
-var gallery = document.getElementById("imagegallery");
-gallery.parentNode.insertBefore(placeholder, gallery);
-gallery.parentNode.insertBefore(description, gallery);
+window.onload = function() {
+
+    preparePlaceholder();
+    prepareGallery();
+}
