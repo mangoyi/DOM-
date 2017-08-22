@@ -54,3 +54,11 @@ function insertAfter(newElement, targetElement) {
         parent.insertBefore(newElement, targetElement.nextSibling);
     }
 }
+
+/*
+    模拟服务器相应：
+    1.创建一个example.txt文件--  内如: This was loaded asynchronously!
+    2. 编写getHTTPObject.js
+    3. 编写getNewContent.js
+
+*/
