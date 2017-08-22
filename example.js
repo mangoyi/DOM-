@@ -4,7 +4,6 @@ function insertParagraph(text) {
     str += '</p>';
     document.write(str);
 }
-
 window.onload = function() {
     var para = document.createElement('p');
     var txt1 = document.createTextNode('This is');

@@ -50,7 +50,6 @@ function insertAfter(newElement, targetElement) {
 }
 
 window.onload = function() {
-
     preparePlaceholder();
     prepareGallery();
 }
