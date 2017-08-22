@@ -13,16 +13,7 @@ function showPic(whichPic){
     return true;    
 }
 
-// function countBodyChildren() {
-//     var body_element = document.getElementsByTagName('body')[0];
-
-//     for (var i = 0, len=body_element.childNodes.length; i < len; i++) {
-//         console.log(body_element.childNodes[i].nodeType + '\n');
-//     }
-// }
-
 window.onload = function() {
-    // countBodyChildren();
     prepareGallery();
 }
 
@@ -33,8 +24,23 @@ function prepareGallery() {
         links[i].onclick = function() {
             return showPic(this) ? false : true;   // 阻止a元素的默认行为
         }
-        // links[i].onkeypress = function() {
-        //     return showPic(this) ? false : true;   // 非鼠标用户
-        // }
     }
 }
+
+// js创建img元素和p元素生成到文档中
+var placeholder = document.createElement('img');
+placeholder.setAttribute("id", "placeholder");
+placeholder.setAttribute("src", "placeholder.jpg");
+placeholder.setAttribute("alt", "my image gallery");
+var description = document.createElement('p');
+description.setAttribute("id", "description");
+var desctext = document.createTextNode("Choose an image");
+description.appendChild(desctext);
+
+// 插入文档
+document.body.appendChild(placeholder);
+document.body.appendChild(description);
+
+var gallery = document.getElementById("imagegallery");
+gallery.parentNode.insertBefore(placeholder, gallery);
+gallery.parentNode.insertBefore(description, gallery);
