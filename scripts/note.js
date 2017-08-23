@@ -79,3 +79,13 @@ function insertAfter(newElement, targetElement) {
     并容许那些不规范的页面在新浏览器也能正常工作。 一般来说，我们应当坚持标准模式。而HTML5 DOCTYPE默认对应的就是标准模式
 */
 
+/*
+    HTML去搭建文档的结构
+    CSS去设置文档的呈现效果
+    DOM脚本去实现文档的行为
+
+    三种技术之前存在着潜在的重叠区域，用DOM可以改变网页的结构，诸如：createElement和appendChild之类的DOM方法允许创建和添加标记
+    在CSS上也有这种技术相互重叠的例子，诸如 :hover和:focus之类的伪类允许你根据用户触发事件改变元素的呈现效果。
+    CSS正在利用伪类走向DOM的领地，DOM也可以给元素设定样式。
+
+*/
