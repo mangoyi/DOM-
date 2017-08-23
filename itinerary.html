@@ -33,27 +33,6 @@
         </tbody>
     </table>
 
-    <script>
-
-        // js实现斑马线效果(巧妙！！！！！！！！！！！！！！！！！！！)
-        function stripeTables() {
-            var tables = document.getElementsByTagName('table');
-            var odd, rows;
-            for (var i=0,len=tables.length; i<len; i++) {
-                odd = false;
-                rows = tables[i].getElementsByTagName('tr');
-                for (var j=0, rowlen=rows.length; j<rowlen; j++) {
-                    if (odd == true) {
-                        rows[j].style.backgroundColor = '#ffc';
-                        odd = false;
-                    } else {
-                        odd = true;
-                    }
-                }
-            }
-        }
-        stripeTables();
-
-    </script>
+    <script src="scripts/highlightRows.js"></script>
 </body>
 </html>
