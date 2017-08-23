@@ -89,3 +89,14 @@ function insertAfter(newElement, targetElement) {
     CSS正在利用伪类走向DOM的领地，DOM也可以给元素设定样式。
 
 */
+
+// 封装当前元素节点的下一个元素节点（不是下一个节点--可能是文本节点）
+function getNextElement(node) {
+    if (nodeType === 1) {  // 元素节点为1 文本节点为3
+        return node;
+    }
+    if (node.nexSibling) {
+        return getNextElement(node.nextSibling);
+    }
+    return null;
+}
