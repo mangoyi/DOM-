@@ -18,7 +18,42 @@ function displayAbbreviations() {
         defs[key] = definition;
     }
 
-    console.log(defs)
+    // 5 创建dl元素
+    var dlist = document.createElement('dl');
+
+    // 6 遍历数组
+    for (key in defs) {
+        var info = defs[key];   // title
+
+        // 7 创建dt元素内容
+        var dtitle = document.createElement('dt');
+        var dtitle_text = document.createTextNode(key);
+        dtitle.appendChild(dtitle_text);
+
+        // 8 创建dd元素内容
+        var ddesc = document.createElement('dd');
+        var ddesc_text = document.createTextNode(info);
+        ddesc.appendChild(ddesc_text);
+
+        // 9 添加到dl元素
+        dlist.appendChild(dtitle);
+        dlist.appendChild(ddesc);
+    }
+
+    // 10 创建描述性标题
+    var header = document.createElement('h2');
+    var header_text = document.createTextNode('Abbreviations');
+    header.appendChild(header_text);
+
+    // 11 插入描述性标题到body里
+    document.body.appendChild(header);
+    
+    // 12 插入“缩略语”本身列表
+    document.body.appendChild(dlist);
+
+    console.log(defs);
 }
 
-displayAbbreviations();
+window.onload = function() {
+    displayAbbreviations();
+};   
