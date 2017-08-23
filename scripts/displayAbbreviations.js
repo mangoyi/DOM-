@@ -57,3 +57,12 @@ function displayAbbreviations() {
 window.onload = function() {
     displayAbbreviations();
 };   
+
+/*
+    微软IE在IE6不支持abbr标签元素。
+    而如果该页面是在IE6浏览器中使用的，那么就意外地踩到了一个地雷
+    三种方式：
+    1、把abbr元素同一替换成IE6支持的acronym元素，但是这样对语义化标签元素不合理。
+    2、在元素使用html命名空间(<html :abbr>abbr</html :abbr>),这样IE就可以识别这个元素了。这让我联想到了Vue框架中扩展元素
+    3、平稳退化，也就是当IE（或者不能识别abbr元素的浏览器）可以提前退出。 --- 最佳选择
+*/

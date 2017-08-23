@@ -78,3 +78,4 @@ function insertAfter(newElement, targetElement) {
     某些浏览器要根据DOCTYPE来决定使用标准模式，还是使用兼容模式来呈现页面。兼容模式意味着浏览器要模仿某些早期浏览器“怪异行为”。
     并容许那些不规范的页面在新浏览器也能正常工作。 一般来说，我们应当坚持标准模式。而HTML5 DOCTYPE默认对应的就是标准模式
 */
+
