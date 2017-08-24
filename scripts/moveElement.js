@@ -1,3 +1,4 @@
+/*
 function moveElement(elementID, final_x, final_y, interval) {
     var elem = document.getElementById(elementID);
     if (elem.moveElement) {
@@ -26,6 +27,7 @@ function moveElement(elementID, final_x, final_y, interval) {
     // movement = setTimeout(repeat, interval);
     elem.moveElement = setTimeout(repeat, interval);
 }
+*/
 /*
     如果在没有设置movement变量之前就执行这条语句，会出现报错。所以不能使用局部变量，也不能使用全局变量。
     需要使用一种介乎二者之间的东西，需要一个只与被移动的那个元素有关的变量。
@@ -55,6 +57,7 @@ function moveElement(elementID, final_x, final_y, interval) {
 
 */
 
+// 平滑迅速的动画效果
 function moveElement(elementID, final_x, final_y, interval) {
     var elem = document.getElementById(elementID);
     if (elem.moveElement) {
