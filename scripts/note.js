@@ -100,3 +100,7 @@ function getNextElement(node) {
     }
     return null;
 }
+
+/* position: static/fixed/absolute/relative
+   static是position属性的默认值，意思是有关元素将按照它们在标记里出现的先后顺序出现在浏览器窗口里
+*/
