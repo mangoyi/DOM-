@@ -63,6 +63,12 @@ function moveElement(elementID, final_x, final_y, interval) {
     if (elem.moveElement) {
         clearTimeout(elem.moveElement);
     }
+    if (!elem.style.left) {
+        elem.style.left = "0px";
+    }
+    if (!elem.style.top) {
+        elem.style.top = "0px";
+    }
     var xpos = parseInt(elem.style.left);
     var ypos = parseInt(elem.style.top);
     var dist = 0;
