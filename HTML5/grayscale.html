@@ -44,7 +44,7 @@
             canvas.height = img.height;
 
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
+            ctx.drawImage(img, 0, 0);   
 
             // 注意getImageData 只能操作与脚本位于同一个域中的图片
             var c = ctx.getImageData(0, 0, img.width, img.height);
