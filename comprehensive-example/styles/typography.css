@@ -1,0 +1,50 @@
+/* 
+    在css样式分配中，字体和大小是放在了typography这个css文件中。
+    内边距的信息都放在了layout.css文件中，页面颜色的样式放在了color.css文件中
+    外边距的信息都放在了typography.css文件中。
+    这样的划分不适合页面调整或者二次开发或者修改bug。
+    但是作者这样写，自然有他独到的理解。这里按照书上原作者的方式来实现，并学习。
+*/
+body {
+    /* font-size: 76%; */
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+body * {
+    font-size: 1em;
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+}
+header nav {
+    font-family: "Lucida Grande", "Helvetica", "Arial", sans-serif;
+}
+header nav a{
+    text-decoration: none;
+    font-weight: bold;
+}
+article {
+    line-height: 1.8em;
+}
+article p {
+    margin: 1em 0;
+}
+h1 {
+    font-family: "Georgia" , "Times New Roman", sans-serif;
+    font: 2.4em normal;
+}
+h2 {
+    font-family: "Georgia", "Times New Roman", sans-serif;
+    font: 1.8em normal;
+    margin-top: 1em;
+}
+#imagegallery li{
+    list-style-type: none;
+}
+textarea {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+p{
+    font-size: 1.2em;
+}
+
