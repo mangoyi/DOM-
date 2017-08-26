@@ -11,13 +11,10 @@ header img{
 }
 body {
     margin: 1em 10% 0 10%;
-    background-image: url(../images/background.jpg);
+    background-image: url(../images/background.webp);
     background-attachment: fixed;
     background-size: cover;
-    background-position: top left;
 }
-/* header {
-} */
 header nav{
     background-image: url(../images/navbar.jpg);
     background-repeat: repeat-x;
