@@ -22,7 +22,7 @@ function addClass(element, value) {
     }
 }
 
-// 添加here类的函数
+// 添加here类的函数（导航）
 function highlightPage () {
     var headers = document.getElementsByTagName('header');
     if (headers.length == 0) {
@@ -34,23 +34,99 @@ function highlightPage () {
     }
     var links = navs[0].getElementsByTagName('a');
     for (var i=0, len=links.length; i<len; i++) {
-        var linkurl;
-        for (var j=0, jlen=links.length; j<jlen; j++) {
-            // 比较当前链接的URL与当前页面的URL是否一致。
-            linkurl = links[i].getAttribute('href');
 
-            // 如果没有匹配到，则indexOf方法将返回-1
-            if (window.location.href.indexOf(linkurl) != -1) {
-                // 此时的链接一定是指向当前页面的链接
-                links[i].className = "here";
-                var linktext = links[i].lastChild.nodeValue.toLowerCase();
-                console.log(linktext);                                           // home
-                document.body.setAttribute("id", linktext);                      // 每个页面的body具有自己的id值
+        // 比较当前链接的URL与当前页面的URL是否一致。
+        var linkurl = links[i].getAttribute('href');
+
+        // 如果没有匹配到，则indexOf方法将返回-1
+        if (window.location.href.indexOf(linkurl) != -1) {
+            // 此时的链接一定是指向当前页面的链接
+            links[i].className = "here";
+            var linktext = links[i].lastChild.nodeValue.toLowerCase();
+            console.log(linktext);                                           // home
+            document.body.setAttribute("id", linktext);                      // 每个页面的body具有自己的id值
+        }
+    }
+}
+
+// moveElement函数
+function moveElement(elementID, final_x, final_y, interval) {
+    var elem = document.getElementById(elementID);
+    if (elem.movement) {
+        clearTimeout(elem.movement);
+    }
+    if (!elem.style.left) {
+        elem.style.left = "0px";
+    }
+    if (!elem.style.top) {
+        elem.style.top = "0px";
+    }
+    var xpos = parseInt(elem.style.left);
+    var ypos = parseInt(elem.style.top);
+    if (xpos == final_x && ypos==final_y) {
+        return true;
+    }
+    if (xpos < final_x) {
+        var dist = Math.ceil((final_x - xpos)/10);
+        xpos = xpos + dist;
+    }
+    if (xpos > final_x) {
+        var dist = Math.ceil((xpos - final_x)/10);
+        xpos = xpos - dist;
+    }
+    if (ypos < final_y) {
+        var dist = Math.ceil((final_y - ypos)/10);
+        ypos = ypos + dist;
+    }
+    if (ypos > final_y) {
+        var dist = Math.ceil((ypos - final_y)/10);
+        ypos = ypos - dist;
+    }
+    elem.style.left = xpos + 'px';
+    elem.style.top = ypos + 'px';
+    var repeat = "moveElement('"+ elementID +"',"+final_x+","+final_y+","+interval+")";
+    elem.movement = setTimeout(repeat, interval);
+}
+
+// 将幻灯片放置在intro文档段落后面
+function prepareSlideshow() {
+    var intro = document.getElementById('intro');
+    var slideshow = document.createElement('div');
+    slideshow.setAttribute("id", "slideshow");
+    var preview = document.createElement('img');
+    preview.setAttribute('src', 'images/slideshow.jpg');
+    preview.setAttribute('alt', "a glimpse of what awaits you ");
+    preview.setAttribute("id", "preview");
+    slideshow.appendChild(preview);
+    insertAfter(slideshow, intro);
+
+    // 动画效果更明显将interval设置为5
+    var links = intro.getElementsByTagName('a');
+    var destination;
+    for (var i=0, len=links.length; i<len; i++) {
+        links[i].onmouseover = function() {
+            destination = this.getAttribute("href");
+            if (destination.indexOf("index.html") != -1) {
+                moveElement("preview", 0, 0, 5);
+            }
+            if (destination.indexOf("about.html") != -1) {
+                moveElement("preview", -240, 0, 5);
+            }
+            if (destination.indexOf("photos.html") != -1) {
+                moveElement("preview", -480, 0, 5);
+            }
+            if (destination.indexOf("live.html") != -1) {
+                moveElement("preview", -720, 0, 5);
+            }
+            if (destination.indexOf("contact.html") != -1) {
+                moveElement("preview", -960, 0, 5);
             }
         }
     }
 }
 
 window.onload = function() {
+    prepareSlideshow();
     highlightPage();
 }
+

@@ -16,8 +16,8 @@ body {
     background-size: cover;
     background-position: top left;
 }
-header {
-}
+/* header {
+} */
 header nav{
     background-image: url(../images/navbar.jpg);
     background-repeat: repeat-x;
@@ -60,4 +60,13 @@ article img {
     border-style: solid;
     outline-width: 0.1em;
     outline-style: solid;
+}
+#slideshow{
+    width: 240px;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+#preview{
+    position: absolute;
 }
