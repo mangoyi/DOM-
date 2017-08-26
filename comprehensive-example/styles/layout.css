@@ -10,7 +10,7 @@ header img{
     margin: 0 auto;
 }
 body {
-    margin: 5em 10%;
+    margin: 1em 10% 0 10%;
     background-image: url(../images/background.jpg);
     background-attachment: fixed;
     background-size: cover;

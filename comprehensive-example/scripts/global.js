@@ -90,6 +90,9 @@ function moveElement(elementID, final_x, final_y, interval) {
 
 // 将幻灯片放置在intro文档段落后面
 function prepareSlideshow() {
+    if (!document.getElementById('intro')) {
+        return false;                               // 安全检查（nav之间的切换中，有些元素不存在。不做安全检查会出错）
+    }
     var intro = document.getElementById('intro');
     var slideshow = document.createElement('div');
     slideshow.setAttribute("id", "slideshow");
@@ -125,8 +128,50 @@ function prepareSlideshow() {
     }
 }
 
+// 根据指定id显示相应的<section> 同时隐藏其他部分
+function showSection(id) {
+    var sections = document.getElementsByTagName('section');
+    for (var i=0, len=sections.length; i<len; i++) {
+        if (sections[i].getAttribute('id') != id) {
+            sections[i].style.display = "none";
+        } else {
+            sections[i].style.display = "block";
+        }
+    }
+}
+
+// nav所包含的链接单机时调用showSection函数
+function prepareInternalnav() {
+    var articles = document.getElementsByTagName('article');
+    if (articles.length == 0) {
+        return false;
+    }
+    var navs = articles[0].getElementsByTagName('nav');
+    if (navs.length == 0) {
+        return false;
+    }
+    var links = navs[0].getElementsByTagName('a');
+    for (var i=0, len=links.length; i<len; i++) {
+        // #开头表示内部链接。 #jay
+        var sectionId = links[i].getAttribute("href").split('#')[1];  // 得到id值为jay
+        document.getElementById(sectionId).style.display = "none";
+
+        // 存在变量作用域问题 sectionId 时局部变量，只有在函数执行期间存在，等事件处理函数执行的时候就已经不存在了。
+        // 解决的方法 ： 可以为每个链接创建一个自定义的属性 比如属性命名为destination  然后把sectionId的值赋给它。
+        links[i].destination = sectionId;
+        
+        // 这个属性的作用域是持久存在的。
+        links[i].onclick = function() {
+            showSection(this.destination);
+            return false;                           // 取消事件默认行为
+        }
+
+        // 例子： 要是有一个常见问题页面。那么每个问题都可以作为内部链接来处理。点击其中一个问题，就会显示该问题对应的答案。其他答案不显示。
+    } 
+}
+
 window.onload = function() {
     prepareSlideshow();
     highlightPage();
+    prepareInternalnav();
 }
-
