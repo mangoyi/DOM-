@@ -170,8 +170,66 @@ function prepareInternalnav() {
     } 
 }
 
+// 图片库
+function showPic(whichpic) {
+    if (!document.getElementById('placeholder')) {
+        return true;
+    }
+    var source = whichpic.getAttribute("href");
+    var placeholder = document.getElementById('placeholder');
+    placeholder.setAttribute("src", source);
+    if (!document.getElementById('description')) {
+        return false;
+    }
+    if (whichpic.getAttribute('title')) {
+        var text = whichpic.getAttribute('title');
+    } else {
+        var text = ' ';
+    }
+    var description = document.getElementById('description');
+    if (description.firstChild.nodeType == 3) {
+        description.firstChild.nodeValue = text;
+    }
+    return false;
+}
+
+
+// 创建placeholder图片
+function preparePlaceholder() {
+    if (!document.getElementById('imagegallery')) {
+        return false;
+    }
+    var placeholder = document.createElement('img');
+    placeholder.setAttribute('id', "placeholder");
+    placeholder.setAttribute('src', "images/placeholder.jpg");
+    placeholder.setAttribute('alt', "my image gallery");
+    var description = document.createElement('p');
+    description.setAttribute('id', "description");
+    var desctext = document.createTextNode('Choose an image');
+    description.appendChild(desctext);
+    var gallery = document.getElementById('imagegallery');
+    insertAfter(description, gallery);
+    insertAfter(placeholder, description);
+}
+
+// 为每一张图片增加点击事件
+function prepareGallery() {
+    if (!document.getElementById('imagegallery')) {
+        return false;
+    }
+    var gallery = document.getElementById('imagegallery');
+    var links = gallery.getElementsByTagName('a');
+    for (var i=0, len=links.length; i<len; i++) {
+        links[i].onclick = function() {
+            return showPic(this);
+        }
+    }
+}
+
 window.onload = function() {
     prepareSlideshow();
     highlightPage();
     prepareInternalnav();
+    preparePlaceholder();
+    prepareGallery();
 }

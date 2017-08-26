@@ -67,3 +67,6 @@ article img {
 #preview{
     position: absolute;
 }
+#imagegallery li{
+    display: inline-block;
+}
