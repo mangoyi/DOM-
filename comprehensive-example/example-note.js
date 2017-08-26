@@ -10,4 +10,8 @@
         5、主页！ 放上乐队简介和导航
     5个页面的结构相似，先创建一个模板html文件template.html
 */
-
+/*
+    1 构建完模板 template.html
+    2 完成基本的布局 layout.css
+    3 
+*/

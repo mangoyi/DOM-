@@ -1,0 +1,63 @@
+section, header, article, nav{
+    display: block;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+header img{
+    display: block;   /* 图片默认的3px下沉 */
+    margin: 0 auto;
+}
+body {
+    margin: 5em 10%;
+    background-image: url(../images/background.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top left;
+}
+header {
+}
+header nav{
+    background-image: url(../images/navbar.jpg);
+    background-repeat: repeat-x;
+    border-width: .1em;
+    border-style: solid;
+    border-bottom-width: 0;
+    border-top-width: 0;
+}
+header nav ul {
+    margin: 0 auto;
+    width: 38%;
+    min-width: 566px;
+    overflow: hidden;
+    border-left-width: 0.1em;
+    border-left-style: solid;
+}
+header nav li {
+    display: inline;
+}
+header nav ul:after{
+    display: block;
+    content: " ";
+    clear: both;
+}
+header nav li a {
+    display: block;
+    float: left;
+    padding: 0.5em 2em;
+    border-right: 0.1em solid;
+}
+article {
+    border-width: 0.1em;
+    border-style: solid;
+    border-top-width: 0;
+    padding: 2em 10%;
+    line-height: 1.8em;
+}
+article img {
+    border-width: 0.1em;
+    border-style: solid;
+    outline-width: 0.1em;
+    outline-style: solid;
+}
