@@ -33,15 +33,20 @@ function highlightPage () {
         return false;   // 安全检测
     }
     var links = navs[0].getElementsByTagName('a');
-    var linkurl;
     for (var i=0, len=links.length; i<len; i++) {
-        // 比较当前链接的URL与当前页面的URL是否一致。
-        linkurl = links[i].getAttribute('href');
+        var linkurl;
+        for (var j=0, jlen=links.length; j<jlen; j++) {
+            // 比较当前链接的URL与当前页面的URL是否一致。
+            linkurl = links[i].getAttribute('href');
 
-        // 如果没有匹配到，则indexOf方法将返回-1
-        if (window.location.href.indexOf(linkurl) != -1) {
-            // 此时的链接一定是指向当前页面的链接
-            links[i].className = "here";
+            // 如果没有匹配到，则indexOf方法将返回-1
+            if (window.location.href.indexOf(linkurl) != -1) {
+                // 此时的链接一定是指向当前页面的链接
+                links[i].className = "here";
+                var linktext = links[i].lastChild.nodeValue.toLowerCase();
+                console.log(linktext);                                           // home
+                document.body.setAttribute("id", linktext);                      // 每个页面的body具有自己的id值
+            }
         }
     }
 }
