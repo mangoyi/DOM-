@@ -84,3 +84,7 @@ dt {
 dd {
     float:left;
 }
+/* contact */
+label {
+    display: block;
+}

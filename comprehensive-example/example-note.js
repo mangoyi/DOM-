@@ -19,3 +19,21 @@
 /*
     安全检测是非常重要的！！！！！！！！！！！！！！！！
 */
+/**
+ * 
+ * label 对于增进可访问性的元素，label是非常有用的。
+ * 很多浏览器都会为label元素添加默认行为，如果label中的文本被单击。关联的表单字段就会获得焦点。
+ */
+/*
+    placeholder属性在旧版浏览器是看不到在字段中的占位符文本。
+    HTML DOM中常用的一个对象， form对象。
+
+
+    文档中的每个表单元素都是一个form对象，每个form对象都有一个elements.length属性，这个属性返回表单包含的表单元素的个数.
+    
+    form.elements.length，这个返回值和childNodes.length不一样，后者返回的事元素中包含的所有节点的个数。
+    而form对象的elements.length属性只关注那些属于表单的元素，input、textarea等
+
+    相应地：：：： 表单的所有字段都保存在form对象的elements属性中。也就是说下面是一个包含所有表单元素的数组
+    form.elements
+*/

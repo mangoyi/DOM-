@@ -300,6 +300,21 @@ function displayAbbreviations() {
     container.appendChild(dlist);
 }
 
+// 模拟实现点击label关联的表单聚焦
+function focusLabels() {
+    var labels = document.getElementsByTagName('label');
+    for (var i=0, len=labels.length; i<len; i++) {
+        if (!labels[i].getAttribute("for")) {
+            continue;
+        }
+        labels.onclick = function() {
+            var id = this.getAttribute('for');
+            var element = document.getElementById(id);
+            element.focus();
+        }
+    }
+}
+
 window.onload = function() {
     prepareSlideshow();
     highlightPage();
