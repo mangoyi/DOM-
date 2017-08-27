@@ -226,10 +226,88 @@ function prepareGallery() {
     }
 }
 
+// live 表格中的stripeTables函数
+function stripeTables() {
+    var tables = document.getElementsByTagName('table');
+    for (var i=0,len=tables.length; i<len; i++) {
+        var odd = false;
+        var rows = tables[i].getElementsByTagName('tr');
+        for (var j=0, len2=rows.length; j<len2; j++) {
+            if (odd == true) {
+                addClass(rows[j], "odd");
+                odd = false;
+            } else {
+                odd = true;
+            }
+        }
+    }
+} 
+
+// highlightRows函数
+function highlightRows() {
+    var rows = document.getElementsByTagName('tr');
+    for (var i=0, len=rows.length; i<len; i++) {
+        rows[i].oldClassName = rows[i].className;
+        rows[i].onmouseover = function() {
+            addClass(this, "highlight");
+        }
+        rows[i].onmouseout = function() {
+            this.className = this.oldClassName;
+        }
+    }
+}
+
+// displayAbbreviations 函数
+function displayAbbreviations() {
+    var abbreviations = document.getElementsByTagName('abbr');
+    if (abbreviations.lenth < 1) {
+        return false;
+    }
+    var defs = [];
+    for (var i=0, len=abbreviations.length; i<len; i++) {
+        var current_abbr = abbreviations[i];
+        if (current_abbr.childNodes.length < 1) {
+            continue;                     
+        }
+        var definition = current_abbr.getAttribute('title');
+        var key = current_abbr.lastChild.nodeValue;          // abbr标签元素的内容
+        defs[key] = definition;
+    }
+    var dlist = document.createElement('dl');
+    for (key in defs) {
+        var definition2 = defs[key];
+        var dtitle = document.createElement('dt');
+        var dtitle_text = document.createTextNode(key);
+        dtitle.appendChild(dtitle_text);
+        var ddesc = document.createElement('dd');
+        var ddesc_text = document.createTextNode(definition2);
+        ddesc.appendChild(ddesc_text);
+        dlist.appendChild(dtitle);
+        dlist.appendChild(ddesc);
+    }
+    if (dlist.childNodes.length < 1) {
+        return false;   // 安全检查
+    }
+    var header = document.createElement('h3');
+    var header_text = document.createTextNode("Abbreviations");
+    header.appendChild(header_text);
+    var articles = document.getElementsByTagName('article');
+    if (articles.length == 0) {
+        return false;
+    }
+    var container = articles[0];
+    container.appendChild(header);
+    container.appendChild(dlist);
+}
+
 window.onload = function() {
     prepareSlideshow();
     highlightPage();
     prepareInternalnav();
     preparePlaceholder();
     prepareGallery();
+
+    stripeTables();
+    highlightRows();
+    displayAbbreviations();
 }

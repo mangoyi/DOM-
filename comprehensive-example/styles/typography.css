@@ -47,4 +47,10 @@ textarea {
 p{
     font-size: 1.2em;
 }
-
+/* live */
+dt {
+    margin-right: 1em;
+}
+dd {
+    margin-right: 3em;
+}

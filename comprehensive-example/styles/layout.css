@@ -70,3 +70,17 @@ article img {
 #imagegallery li{
     display: inline-block;
 }
+/* live */
+th, td {
+    padding: 0.5em 3em;
+}
+
+dl {
+    overflow: hidden;
+}
+dt {
+    float: left;
+}
+dd {
+    float:left;
+}
