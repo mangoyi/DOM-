@@ -315,7 +315,94 @@ function focusLabels() {
     }
 }
 
-window.onload = function() {
+// getHTTPObject函数
+function getHTTPObject() {
+    if (typeof XMLHttpRequest == 'undefined') {
+        var versions = ["Msxml2.XMLHTTP.6.0", "Msxml2.XMLHTTP.3.0", "Msxml2.XMLHTTP"];
+        for (var i =0, len=versions.length; i<len; i++) {
+            try {
+                return new ActiveXObject(versions[i]);
+            } catch (e) {
+                throw error("error");
+            }    
+        }
+    }
+    return new XMLHttpRequest();
+}
+
+// displayAjaxLoading函数
+function displayAjaxLoading(element) {
+    while (element.hasChildNodes()) {
+        element.removeChild(element.lastChild);
+    }
+    var content = document.createElement("img");
+    content.setAttribute('src', 'images/loading.gif');
+    content.setAttribute('alt', 'Loading...');
+    element.appendChild(content);
+}
+
+// submitFormWithAjax函数
+function submitFormWithAjax( whichform, thetarget) {
+    var request = getHTTPObject();
+    if (!request) {
+        return false;
+    }
+    displayAjaxLoading(thetarget);               //  在thetargetDOM中显示loading.gif
+
+    // 创建url编码的表单数据字符串 name=value&name2=value2&name3=value3
+    var dataParts = [];
+    var element;
+    for (var i=0, len=whichform.elements.length; i<len; i++) {
+        element  = whichform.elements[i];
+        dataParts[i] = element.name + '=' +encodeURIComponent(element.value);
+    }
+
+    // 获得name=value&name2=value2数据格式的字符串
+    var data = dataParts.join('&');
+
+    // 向原始表单的action属性指定的处理函数发送POST请求
+    request.open('POST', whichform.getAttribute('action'), true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    // 正则提取<article>中内容的正则表达式
+    request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+            if (request.status == 200 || request.status == 0) {
+                var matches = request.responseText.match(/<article>([\s\S]+)<\/article>/);
+                if (matches.length > 0) {
+                    thetarget.innerHTML = matches[1];
+                } else {
+                    thetarget.innerHTML = '<p>Oops, there was an error. Sorry.</p>';
+                }
+            } else {
+                thetarget.innerHTML = '<p> '+ request.statusText + '</p>';
+            }
+        }
+    };
+
+    // 发送请求
+    request.send(data);
+    return true;
+}
+
+// 提交表单
+function prepareForms() {
+    for (var i=0, len=document.forms.length; i<len; i++) {
+        var thisform = document.forms[i];
+        var formSub = thisform.getElementsByTagName('input')[2];
+        formSub.onclick = function() {
+            
+            // 表单校验成功
+            var article = document.getElementsByTagName('article')[0];
+            if (submitFormWithAjax(thisform, article)) {
+                return false;   // 阻止默认行为
+            }
+            return true;   // 如果之前没有成功发送ajax请求，这里依然使用不阻止表单的默认提交方式
+        }
+    }
+}
+
+window.onload = function () {
     prepareSlideshow();
     highlightPage();
     prepareInternalnav();
@@ -325,4 +412,6 @@ window.onload = function() {
     stripeTables();
     highlightRows();
     displayAbbreviations();
-}
+
+    prepareForms();
+};
