@@ -369,8 +369,12 @@ function submitFormWithAjax( whichform, thetarget) {
         if (request.readyState == 4) {
             if (request.status == 200 || request.status == 0) {
                 var matches = request.responseText.match(/<article>([\s\S]+)<\/article>/);
+
+                // var matches = request.responseText.match(/<article>([\s\S]+)<\/article>/);
+                // 如果加上g修饰符，那么匹配的结果只是长度为1的数组。
+
                 if (matches.length > 0) {
-                    thetarget.innerHTML = matches[1];
+                    thetarget.innerHTML = matches[1];     // matches[1]匹配的是括号捕获组里面的内容
                 } else {
                     thetarget.innerHTML = '<p>Oops, there was an error. Sorry.</p>';
                 }
